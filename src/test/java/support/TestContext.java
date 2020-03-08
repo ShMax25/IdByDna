@@ -1,0 +1,47 @@
+package support;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class TestContext {
+  //Here could be selected which browser will be used
+  private static WebDriver driver = initialize("chrome");
+
+  public static WebDriver getDriver() {
+    return driver;
+  }
+
+  //Base on os name will be used chromedriver or geckodriver.exe
+  private static WebDriver initialize (String browser) {
+    String osName = System.getProperty("os.name");
+
+    switch (browser) {
+      case ("chrome"):
+        if (osName.contains("Windows")) {
+          System.setProperty("webdriver.chrome.driver", "/Users/msmuli/IdeaProjects/SalesforceTests/src/test/resources/drivers/macOS/chromedriver");
+        }
+        driver = new ChromeDriver();
+        break;
+
+      case ("firefox"):
+        if (osName.startsWith("Windows")) {
+          System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\src\\test\\resources\\drivers\\win64\\geckodriver.exe");
+        }
+
+        if (osName.startsWith("Mac")) {
+          //System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "src/test/resources/drivers/macOS/chromedriver");
+          System.setProperty("webdriver.chrome.driver", "/Users/msmuli/IdeaProjects/SalesforceTests/src/test/resources/drivers/macOS/geckodriver");
+        }
+
+        driver = new FirefoxDriver();
+        break;
+      case ("explorer"):
+        //TBD here could be added ieDriver
+        break;
+      default:
+        throw new RuntimeException("Driver is not implemented for: " + browser);
+    }
+    return driver;
+  }
+}
