@@ -2,8 +2,11 @@ package support;
 
 import cucumber.api.java8.Fi;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
@@ -19,15 +22,19 @@ public class TestContext {
     return driver;
   }
 
+  public static WebElement waitForElement(WebElement element) {
+    return new WebDriverWait(getDriver(), 15, 200).until(ExpectedConditions.elementToBeClickable(element));
+  }
+
   //data rider
   public static Map<String, String> getData(String filename) {
     String osName = System.getProperty("os.name");
     String path = "";
     if (osName.contains("Windows")) {
-      path = System.getProperty("user.dir") + "\\src\\test\\resources\\drivers\\" + filename + ".yml";
+      path = System.getProperty("user.dir") + "\\src\\test\\resources\\drivers\\" + filename;
     }
     if (osName.contains("Mac")) {
-      path = System.getProperty("user.dir") + "/src/test/resources/data/" + filename + ".yml";
+      path = System.getProperty("user.dir") + "/src/test/resources/data/" + filename;
     }
     File file = new File(path);
     FileInputStream stream = null;
