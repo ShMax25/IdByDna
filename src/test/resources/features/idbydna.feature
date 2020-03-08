@@ -10,7 +10,7 @@
 #Analysis started
     Scenario: Create an Analysis from the Analysis list page
       Given Open "login" page
-#      And Login to the app
+      And Login to the app
 #      Then Click the "New Analysis" button
 #      And Fill in the form and submit
 #      And Click Select Rads and choose "Enter SRA Run ID."

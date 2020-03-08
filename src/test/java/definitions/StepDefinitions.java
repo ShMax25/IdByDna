@@ -1,5 +1,6 @@
 package definitions;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import pages.LoginPage;
 import pages.MainPage;
@@ -16,4 +17,9 @@ public class StepDefinitions {
     }
   }
 
+  @And("Login to the app")
+  public void loginToTheApp () {
+    LoginPage loginPage = new LoginPage();
+    loginPage.login();
+  }
 }

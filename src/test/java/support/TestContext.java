@@ -1,8 +1,15 @@
 package support;
 
+import cucumber.api.java8.Fi;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.yaml.snakeyaml.Yaml;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Map;
 
 public class TestContext {
   //Here could be selected which browser will be used
@@ -10,6 +17,26 @@ public class TestContext {
 
   public static WebDriver getDriver() {
     return driver;
+  }
+
+  //data rider
+  public static Map<String, String> getData(String filename) {
+    String osName = System.getProperty("os.name");
+    String path = "";
+    if (osName.contains("Windows")) {
+      path = System.getProperty("user.dir") + "\\src\\test\\resources\\drivers\\" + filename + ".yml";
+    }
+    if (osName.contains("Mac")) {
+      path = System.getProperty("user.dir") + "/src/test/resources/data/" + filename + ".yml";
+    }
+    File file = new File(path);
+    FileInputStream stream = null;
+    try {
+      stream = new FileInputStream(file);
+    } catch (FileNotFoundException exception) {
+      System.err.println(exception.getMessage());
+    }
+    return new Yaml().load(stream);
   }
 
   //Base on os name will be used chromedriver or geckodriver.exe
