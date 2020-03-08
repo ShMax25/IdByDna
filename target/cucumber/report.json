@@ -3,20 +3,20 @@
     "line": 2,
     "elements": [
       {
-        "start_timestamp": "2020-03-08T20:35:23.905Z",
-        "line": 14,
-        "name": "Create an Analysis on homepage from aninvalid SRA Run ID",
+        "start_timestamp": "2020-03-08T20:50:11.419Z",
+        "line": 24,
+        "name": "Create an Analysis from the Quick Analysis button",
         "description": "",
-        "id": "testfeature;create-an-analysis-on-homepage-from-aninvalid-sra-run-id",
+        "id": "testfeature;create-an-analysis-from-the-quick-analysis-button",
         "type": "scenario",
         "keyword": "Scenario",
         "steps": [
           {
             "result": {
-              "duration": 1330999298,
+              "duration": 1178476096,
               "status": "passed"
             },
-            "line": 15,
+            "line": 25,
             "name": "Open \"login\" page",
             "match": {
               "arguments": [
@@ -31,10 +31,10 @@
           },
           {
             "result": {
-              "duration": 329232839,
+              "duration": 330469968,
               "status": "passed"
             },
-            "line": 16,
+            "line": 26,
             "name": "Login to the app",
             "match": {
               "location": "StepDefinitions.loginToTheApp()"
@@ -43,57 +43,45 @@
           },
           {
             "result": {
-              "duration": 305254209,
+              "duration": 162731751,
               "status": "passed"
             },
-            "line": 17,
-            "name": "click Analyze your sequencing data button",
+            "line": 27,
+            "name": "Click Quick Analysis button",
             "match": {
-              "location": "StepDefinitions.clickAnalyzeYourSequencingDataButton()"
+              "location": "StepDefinitions.clickQuickAnalysisButton()"
             },
             "keyword": "Then "
           },
           {
             "result": {
-              "duration": 309291529,
+              "duration": 156503775,
               "status": "passed"
             },
-            "line": 18,
-            "name": "Fill in the form and submit",
-            "match": {
-              "location": "StepDefinitions.fillInTheFormAndSubmit()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 1103823460,
-              "status": "passed"
-            },
-            "line": 19,
-            "name": "Click Select Rads and choose \"Enter SRA Run ID\"",
+            "line": 28,
+            "name": "Select \"Enter SRA Run ID\" option",
             "match": {
               "arguments": [
                 {
                   "val": "\"Enter SRA Run ID\"",
-                  "offset": 29
+                  "offset": 7
                 }
               ],
-              "location": "StepDefinitions.clickSelectRadsAndChoose(String)"
+              "location": "StepDefinitions.selectOption(String)"
             },
-            "keyword": "And "
+            "keyword": "Then "
           },
           {
             "result": {
-              "duration": 306154703,
+              "duration": 233975604,
               "status": "passed"
             },
-            "line": 20,
-            "name": "Enter a \"invalid\" SRA Run ID",
+            "line": 29,
+            "name": "Enter a \"valid\" SRA Run ID",
             "match": {
               "arguments": [
                 {
-                  "val": "\"invalid\"",
+                  "val": "\"valid\"",
                   "offset": 8
                 }
               ],
@@ -103,10 +91,10 @@
           },
           {
             "result": {
-              "duration": 60745264,
+              "duration": 68530067,
               "status": "passed"
             },
-            "line": 21,
+            "line": 30,
             "name": "Click submit analysis",
             "match": {
               "location": "StepDefinitions.clickSubmitAnalysis()"
@@ -115,13 +103,13 @@
           },
           {
             "result": {
-              "duration": 75523771,
+              "duration": 1172687,
               "status": "passed"
             },
-            "line": 22,
-            "name": "Verify that system shows error message",
+            "line": 31,
+            "name": "Verify that Analysis started",
             "match": {
-              "location": "StepDefinitions.verifyThatSystemShowsErrorMessage()"
+              "location": "StepDefinitions.verifyThatAnalysisStarted()"
             },
             "keyword": "Then "
           }

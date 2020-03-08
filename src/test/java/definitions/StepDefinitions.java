@@ -85,4 +85,15 @@ public class StepDefinitions {
     String errorMessage = new AnalysisPage().getErrorMessageText();
     assertThat(errorMessage).contains("Currently we only accept SRR, ERR, and DRR.");
   }
+
+  @Then("Click Quick Analysis button")
+  public void clickQuickAnalysisButton () {
+    new MainPage().initializeQuickAnlysis();
+  }
+
+  @Then("Select {string} option")
+  public void selectOption (String option) {
+    new MainPage().slectQuickAnlysisOption(option);
+
+  }
 }

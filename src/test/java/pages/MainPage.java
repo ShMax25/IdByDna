@@ -15,6 +15,12 @@ public class MainPage extends TaxonomerPages {
   @FindBy (xpath = "//button[@class='btn btn-analyze-data ember-view']")
   private WebElement analyzeYourSeqData_button;
 
+  @FindBy (xpath = "//button[@id='select-reads']")
+  private WebElement quickAnlysis_button;
+
+  @FindBy (xpath = "//a[contains(text(),'Enter SRA Run ID')]")
+  private WebElement enterSraRunId_option;
+
   public MainPage() {
     setUrl("https://www.taxonomer.com/");
   }
@@ -30,5 +36,23 @@ public class MainPage extends TaxonomerPages {
 
   public void initiateAnalyzeYourSeqData () {
     analyzeYourSeqData_button.click();
+  }
+
+  public void initializeQuickAnlysis () {
+    quickAnlysis_button.click();
+  }
+
+  public void slectQuickAnlysisOption (String option) {
+    switch (option) {
+      case ("Enter SRA Run ID"): enterSraRunId_option.click();
+        break;
+      case ("Enter URL for FASTQ/FASTA(s)"):
+        break;
+      case ("Choose FASTQ/FASTA File(s)"):
+        break;
+      default: throw new RuntimeException("Unsupported option " + option);
+
+    }
+
   }
 }

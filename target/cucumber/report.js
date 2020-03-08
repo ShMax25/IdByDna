@@ -10,7 +10,7 @@ formatter.feature({
   ]
 });
 formatter.scenario({
-  "name": "Create an Analysis on homepage from aninvalid SRA Run ID",
+  "name": "Create an Analysis from the Quick Analysis button",
   "description": "",
   "keyword": "Scenario",
   "tags": [
@@ -40,37 +40,27 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "click Analyze your sequencing data button",
+  "name": "Click Quick Analysis button",
   "keyword": "Then "
 });
 formatter.match({
-  "location": "StepDefinitions.clickAnalyzeYourSequencingDataButton()"
+  "location": "StepDefinitions.clickQuickAnalysisButton()"
 });
 formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "Fill in the form and submit",
-  "keyword": "And "
+  "name": "Select \"Enter SRA Run ID\" option",
+  "keyword": "Then "
 });
 formatter.match({
-  "location": "StepDefinitions.fillInTheFormAndSubmit()"
+  "location": "StepDefinitions.selectOption(String)"
 });
 formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "Click Select Rads and choose \"Enter SRA Run ID\"",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "StepDefinitions.clickSelectRadsAndChoose(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "Enter a \"invalid\" SRA Run ID",
+  "name": "Enter a \"valid\" SRA Run ID",
   "keyword": "And "
 });
 formatter.match({
@@ -90,11 +80,11 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "Verify that system shows error message",
+  "name": "Verify that Analysis started",
   "keyword": "Then "
 });
 formatter.match({
-  "location": "StepDefinitions.verifyThatSystemShowsErrorMessage()"
+  "location": "StepDefinitions.verifyThatAnalysisStarted()"
 });
 formatter.result({
   "status": "passed"
