@@ -4,6 +4,8 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import cucumber.api.java.it.Ma;
+import pages.HeaderMenu;
 import pages.LoginPage;
 import pages.MainPage;
 import pages.AnalysisPage;
@@ -96,4 +98,41 @@ public class StepDefinitions {
     new MainPage().slectQuickAnlysisOption(option);
 
   }
+
+  @Then("Verify that user is able to delete analysis from Home page")
+  public void verifyThatUserIsAbleToDeleteAnalysisFromHomePage () throws InterruptedException {
+    MainPage mainPage = new MainPage();
+    String analysisName = mainPage.getFirtsAnalysisName();
+    mainPage.deleteFirstAnalysis();
+    new AnalysisPage().confirmDeleteAnalysis();
+    boolean isAnalysisDeleted = mainPage.checkIfAnalysisInList(analysisName);
+    assertThat(isAnalysisDeleted).isFalse();
+
+  }
+
+  @Then("Verify that user is able to cancel delete Analysis action")
+  public void verifyThatUserIsAbleToCancelDeleteAnalysisAction () throws InterruptedException {
+    MainPage mainPage = new MainPage();
+    String analysisName = mainPage.getFirtsAnalysisName();
+    mainPage.deleteFirstAnalysis();
+    new AnalysisPage().cancelDeleteAnalysis();
+    boolean isAnalysisDeleted = mainPage.checkIfAnalysisInList(analysisName);
+    assertThat(isAnalysisDeleted).isTrue();
+  }
+
+  @Then("Go to the {string} page")
+  public void goToThePage (String pageName) throws InterruptedException {
+    new HeaderMenu().navigateTo(pageName);
+  }
+
+  @Then("Verify that user is able to delete Analysis from Analyses page")
+  public void verifyThatUserIsAbleToDeleteAnalysisFromAnalysesPage () throws InterruptedException {
+    AnalysisPage analysisPage = new AnalysisPage();
+    String analysisName = analysisPage.getFirtsAnalysisName();
+    analysisPage.deleteFirtsElement();
+    analysisPage.confirmDeleteAnalysis();
+    boolean isAnalysisDeleted = analysisPage.checkIfAnalysisInList(analysisName);
+    assertThat(isAnalysisDeleted).isFalse();
+  }
 }
+

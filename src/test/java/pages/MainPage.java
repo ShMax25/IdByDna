@@ -21,6 +21,12 @@ public class MainPage extends TaxonomerPages {
   @FindBy (xpath = "//a[contains(text(),'Enter SRA Run ID')]")
   private WebElement enterSraRunId_option;
 
+  @FindBy (xpath = "//tbody/tr[1]/td[1]")
+  private WebElement firstAnalysisname_element;
+
+  @FindBy (xpath = "//tbody/tr[1]//button[contains(@title,'Delete')]")
+  private WebElement firstDeleteanalysis_button;
+
   public MainPage() {
     setUrl("https://www.taxonomer.com/");
   }
@@ -54,5 +60,29 @@ public class MainPage extends TaxonomerPages {
 
     }
 
+  }
+
+  public String getFirtsAnalysisName () {
+    return firstAnalysisname_element.getText();
+  }
+
+  public void deleteFirstAnalysis () {
+    firstDeleteanalysis_button.click();
+  }
+
+  public boolean checkIfAnalysisInList (String analysisName) throws InterruptedException {
+    Thread.sleep(1000);
+    List<WebElement> analysisList = getDriver().findElements(By.xpath("//tbody/tr/td[1]"));
+    String[] analysisNames = new String[analysisList.size()];
+    for (int i = 0; i < analysisList.size(); i++) {
+      analysisNames[i] = analysisList.get(i).getText();
+    }
+
+    for (String n : analysisNames) {
+      if (n.equals(analysisName)) {
+        return true;
+      }
+    }
+    return false;
   }
 }

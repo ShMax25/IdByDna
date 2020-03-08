@@ -42,8 +42,24 @@ public class AnalysisPage extends TaxonomerPages{
   @FindBy(xpath = "//div[@class='ember-view alert alert-danger active']")
   private WebElement invalidRun_errorMessage;
 
+  @FindBy(xpath = "//button[@class='btn btn-primary']")
+  private WebElement confirmDeleteAnalysis_button;
+
+  @FindBy(xpath = "//button[@class='btn btn-danger']")
+  private WebElement cancelDeleteAnalysis_button;
+
+  @FindBy (xpath = "//tbody/tr[1]/td[1]")
+  private WebElement firstAnalysisname_element;
+
+  @FindBy (xpath = "//tbody/tr[1]//button[contains(@title,'Delete')]")
+  private WebElement firstDeleteanalysis_button;
+
   public AnalysisPage () {
     setUrl("https://www.taxonomer.com/analyses/new");
+  }
+
+  public String getFirtsAnalysisName () {
+   return firstAnalysisname_element.getText();
   }
 
 
@@ -86,5 +102,33 @@ public class AnalysisPage extends TaxonomerPages{
 
   public String getErrorMessageText () {
     return invalidRun_errorMessage.getText();
+  }
+
+  public void confirmDeleteAnalysis () {
+    confirmDeleteAnalysis_button.click();
+  }
+
+  public void cancelDeleteAnalysis () {
+    cancelDeleteAnalysis_button.click();
+  }
+
+  public void deleteFirtsElement () {
+    firstDeleteanalysis_button.click();
+  }
+
+  public boolean checkIfAnalysisInList (String analysisName) throws InterruptedException {
+    Thread.sleep(1000);
+    List<WebElement> analysisList = getDriver().findElements(By.xpath("//tbody/tr/td[1]"));
+    String[] analysisNames = new String[analysisList.size()];
+    for (int i = 0; i < analysisList.size(); i++) {
+      analysisNames[i] = analysisList.get(i).getText();
+    }
+
+    for (String n : analysisNames) {
+      if (n.equals(analysisName)) {
+        return true;
+      }
+    }
+    return false;
   }
 }
