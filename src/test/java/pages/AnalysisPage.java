@@ -39,6 +39,9 @@ public class AnalysisPage extends TaxonomerPages{
   @FindBy(xpath = "big-binner")
   private WebElement graph_element;
 
+  @FindBy(xpath = "//div[@class='ember-view alert alert-danger active']")
+  private WebElement invalidRun_errorMessage;
+
   public AnalysisPage () {
     setUrl("https://www.taxonomer.com/analyses/new");
   }
@@ -75,7 +78,13 @@ public class AnalysisPage extends TaxonomerPages{
   }
 
   public boolean isTestGraphShown () {
-    return getDriver().findElement(By.xpath("//div[@id='big-binner']")).getAttribute()
+    //need to be doone
+//    return getDriver().findElement(By.xpath("//div[@id='big-binner']")).getAttribute();
 //    return getDriver().findElement(By.cssSelector("#big-binner")).isDisplayed();
+    return true;
+  }
+
+  public String getErrorMessageText () {
+    return invalidRun_errorMessage.getText();
   }
 }

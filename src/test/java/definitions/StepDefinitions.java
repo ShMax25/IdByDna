@@ -10,6 +10,7 @@ import pages.AnalysisPage;
 
 import java.util.Map;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static support.TestContext.getData;
 
 public class StepDefinitions {
@@ -58,6 +59,7 @@ public class StepDefinitions {
         analysisForm.enterRunId(data.get("firstRun"));
         break;
       case ("invalid"):
+        analysisForm.enterRunId("INVALID1978315");
         break;
       default: throw new RuntimeException("Unsuported option" + option);
     }
@@ -71,5 +73,16 @@ public class StepDefinitions {
   @Then("Verify that Analysis started")
   public void verifyThatAnalysisStarted () {
      boolean visibilityOfGraph = new AnalysisPage().isTestGraphShown();
+  }
+
+  @Then("click Analyze your sequencing data button")
+  public void clickAnalyzeYourSequencingDataButton () {
+    new MainPage().initiateAnalyzeYourSeqData();
+  }
+
+  @Then("Verify that system shows error message")
+  public void verifyThatSystemShowsErrorMessage () {
+    String errorMessage = new AnalysisPage().getErrorMessageText();
+    assertThat(errorMessage).contains("Currently we only accept SRR, ERR, and DRR.");
   }
 }

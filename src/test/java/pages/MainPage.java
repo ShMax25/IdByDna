@@ -27,4 +27,8 @@ public class MainPage extends TaxonomerPages {
       analyzeYourSeqData_button.click();
     }
   }
+
+  public void initiateAnalyzeYourSeqData () {
+    analyzeYourSeqData_button.click();
+  }
 }
