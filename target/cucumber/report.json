@@ -1,0 +1,56 @@
+[
+  {
+    "line": 2,
+    "elements": [
+      {
+        "start_timestamp": "2020-03-08T01:58:30.363Z",
+        "line": 11,
+        "name": "Create an Analysis from the Analysis list page",
+        "description": "",
+        "id": "testfeature;create-an-analysis-from-the-analysis-list-page",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1157329173,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "Open \"login\" page",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"login\"",
+                  "offset": 5
+                }
+              ],
+              "location": "StepDefinitions.openPage(String)"
+            },
+            "keyword": "Given "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@tested"
+          }
+        ]
+      }
+    ],
+    "name": "testfeature",
+    "description": "",
+    "id": "testfeature",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/features/idbydna.feature",
+    "tags": [
+      {
+        "name": "@tested",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      }
+    ]
+  }
+]

@@ -5,6 +5,7 @@ import cucumber.api.junit.Cucumber;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.Dimension;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,7 +23,7 @@ public class TestRunner {
   public static void setup() {
     System.out.println("BeforeAll");
     getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    getDriver().manage().window().maximize();
+    getDriver().manage().window().fullscreen();
   }
 
   @AfterClass
