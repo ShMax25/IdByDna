@@ -24,6 +24,6 @@ public class Hooks {
       byte[] screenshot = screenshotTaker.getScreenshotAs(OutputType.BYTES);
       scenario.embed(screenshot, "image/png");
     }
-    TestContext.teardown();
+//    TestContext.teardown();
   }
 }

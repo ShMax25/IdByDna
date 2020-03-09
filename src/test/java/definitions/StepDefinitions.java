@@ -73,10 +73,10 @@ public class StepDefinitions {
     new AnalysisPage().submitAnalysis();
   }
 
-  @Then("Verify that Analysis started")
-  public void verifyThatAnalysisStarted () {
-     boolean visibilityOfGraph = new AnalysisPage().isTestGraphShown();
-  }
+//  @Then("Verify that Analysis started")
+//  public void verifyThatAnalysisStarted () throws InterruptedException {
+//     boolean visibilityOfGraph = new AnalysisPage().isTestGraphShown();
+//  }
 
   @Then("click Analyze your sequencing data button")
   public void clickAnalyzeYourSequencingDataButton () {
@@ -178,7 +178,9 @@ public class StepDefinitions {
 
   @Then("Verify that user is able to start analysis from Analysis page")
   public void verifyThatUserIsAbleToStartAnalysisFromAnalysisPage () throws InterruptedException {
+    new HeaderMenu().navigateTo("Analyses");
     AnalysisPage analysisPage = new AnalysisPage();
+    analysisPage.initiateNewAnalysis();
 
     Map<String, String> data = getData("runList");
 
@@ -188,6 +190,25 @@ public class StepDefinitions {
     analysisPage.fillForm(analysisName, description);
     analysisPage.choseReadsOption("Enter SRA Run ID");
     analysisPage.enterRunId(data.get("firstRun"));
+    analysisPage.submitAnalysis();
+    assertThat(analysisPage.isTestGraphShown(data.get("firstRun"))).isTrue();
+  }
+
+  @Then("Verify that user is able to start analysis from Home page")
+  public void verifyThatUserIsAbleToStartAnalysisFromHomePage () throws InterruptedException {
+    AnalysisPage analysisPage = new AnalysisPage();
+    new MainPage().initiateNewAnalysis();
+
+    Map<String, String> data = getData("runList");
+
+    String analysisName = "test" + Math.random();
+    String description = "description of" + analysisName;
+
+    analysisPage.fillForm(analysisName, description);
+    analysisPage.choseReadsOption("Enter SRA Run ID");
+    analysisPage.enterRunId(data.get("firstRun"));
+    analysisPage.submitAnalysis();
+    assertThat(analysisPage.isTestGraphShown(data.get("firstRun"))).isTrue();
 
   }
 }

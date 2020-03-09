@@ -36,8 +36,11 @@ public class AnalysisPage extends TaxonomerPages{
   @FindBy(xpath = "//button[@class='btn btn-primary']")
   private WebElement go_button;
 
-  @FindBy(xpath = "big-binner")
+  @FindBy(xpath = "//div[@id='binner']/*[local-name() = 'svg']")
   private WebElement graph_element;
+
+  @FindBy(xpath = "//button[@id='stop-analysis']")
+  private WebElement stopAnalysis_button;
 
   @FindBy(xpath = "//div[@class='ember-view alert alert-danger active']")
   private WebElement invalidRun_errorMessage;
@@ -74,6 +77,12 @@ public class AnalysisPage extends TaxonomerPages{
 
   @FindBy (xpath = "//div[@class='panel panel-info']/div[@class='panel-body']")
   private WebElement analysisDetailsDescription_field;
+
+  @FindBy (xpath = "//ul[@id='sample-names']/li/span")
+  private WebElement runId_element;
+
+  @FindBy (xpath = "//button[@class='btn btn-primary pull-right ember-view']")
+  private WebElement newAnalysis_button;
 
   public AnalysisPage () {
     setUrl("https://www.taxonomer.com/analyses/new");
@@ -119,15 +128,15 @@ public class AnalysisPage extends TaxonomerPages{
   }
 
   public void submitAnalysis () throws InterruptedException {
-    Thread.sleep(2000);
+    new WebDriverWait(getDriver(),15, 200).until(ExpectedConditions.elementToBeClickable(go_button));
     go_button.click();
   }
 
-  public boolean isTestGraphShown () {
-    //need to be doone
-//    return getDriver().findElement(By.xpath("//div[@id='big-binner']")).getAttribute();
-//    return getDriver().findElement(By.cssSelector("#big-binner")).isDisplayed();
-    return true;
+  public boolean isTestGraphShown (String runID) throws InterruptedException {
+    Thread.sleep(1000);
+    WebDriverWait wait = new WebDriverWait(getDriver(), 15, 200);
+    wait.until(ExpectedConditions.textToBePresentInElement(runId_element, runID));
+    return  waitForElement(stopAnalysis_button).isDisplayed();
   }
 
   public String getErrorMessageText () {
@@ -191,5 +200,9 @@ public class AnalysisPage extends TaxonomerPages{
   public String getAnalysisResultsdescription () {
     analysisDetails_button.click();
     return waitForElement(analysisDetailsDescription_field).getText();
+  }
+
+  public void initiateNewAnalysis() {
+    waitForElement(newAnalysis_button).click();
   }
 }
