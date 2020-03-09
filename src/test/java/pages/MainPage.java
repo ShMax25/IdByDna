@@ -24,8 +24,17 @@ public class MainPage extends TaxonomerPages {
   @FindBy (xpath = "//tbody/tr[1]/td[1]")
   private WebElement firstAnalysisname_element;
 
-  @FindBy (xpath = "//tbody/tr[1]//button[contains(@title,'Delete')]")
+  @FindBy (xpath = "//tbody/tr[1]/td[1]/a")
+  private WebElement firstAnalysisname_link;
+
+  @FindBy (xpath = "//tbody/tr[1]//a[contains(@title,'Edit')]")
   private WebElement firstDeleteanalysis_button;
+
+  @FindBy (xpath = "//tbody/tr[1]/td[2]")
+  private WebElement firstAnalysisDescription_element;
+
+  @FindBy (xpath = "//tbody/tr[1]//a[contains(@title,'Edit')]")
+  private WebElement firstEditAnalysis_button;
 
   public MainPage() {
     setUrl("https://www.taxonomer.com/");
@@ -84,5 +93,17 @@ public class MainPage extends TaxonomerPages {
       }
     }
     return false;
+  }
+
+  public String getFirtsAnalysisDescription () {
+    return firstAnalysisDescription_element.getText();
+  }
+
+  public void editFirstAnalysis () {
+    firstEditAnalysis_button.click();
+  }
+
+  public void navigateToResultsPage () {
+    firstAnalysisname_link.click();
   }
 }

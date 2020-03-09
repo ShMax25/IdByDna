@@ -42,7 +42,8 @@ public class StepDefinitions {
   @And("Fill in the form and submit")
   public void fillInTheFormAndSubmit () {
     String analysisName = "test" + Math.random();
-    new AnalysisPage().fillForm(analysisName);
+    String description = "description of" + analysisName;
+    new AnalysisPage().fillForm(analysisName, description);
   }
 
   @And("Click Select Rads and choose {string}")
@@ -68,7 +69,7 @@ public class StepDefinitions {
   }
 
   @When("Click submit analysis")
-  public void clickSubmitAnalysis () {
+  public void clickSubmitAnalysis () throws InterruptedException {
     new AnalysisPage().submitAnalysis();
   }
 
@@ -133,6 +134,61 @@ public class StepDefinitions {
     analysisPage.confirmDeleteAnalysis();
     boolean isAnalysisDeleted = analysisPage.checkIfAnalysisInList(analysisName);
     assertThat(isAnalysisDeleted).isFalse();
+  }
+
+  @Then("Verify that user is able to edit Analysis at Home page")
+  public void verifyThatUserIsAbleToEditAnalysisAtHomePage () {
+    String updatedName = "updated" + Math.random();
+    String updatedDescription = "updatedDescription" + Math.random();
+    MainPage mainPage = new MainPage();
+    AnalysisPage analysisPage = new AnalysisPage();
+    mainPage.editFirstAnalysis();
+    analysisPage.updateForm(updatedName,updatedDescription);
+    analysisPage.confirmUpdate();
+    new HeaderMenu().navigateTo("Home");
+    assertThat(updatedName).isEqualTo(mainPage.getFirtsAnalysisName());
+    assertThat(updatedDescription).isEqualTo(mainPage.getFirtsAnalysisDescription());
+
+  }
+
+  @Then("Verify that user is able to edit Analysis at Analyses page")
+  public void verifyThatUserIsAbleToEditAnalysisAtAnalysesPage () {
+    AnalysisPage analysisPage = new AnalysisPage();
+    new HeaderMenu().navigateTo("Analyses");
+    String updatedName = "updated" + Math.random();
+    String updatedDescription = "updatedDescription" + Math.random();
+    analysisPage.editFirstAnalysis();
+    analysisPage.updateForm(updatedName, updatedDescription);
+    assertThat(updatedName).isEqualTo(analysisPage.getFirtsAnalysisName());
+    assertThat(updatedDescription).isEqualTo(analysisPage.getFirstAbalysisDescription());
+  }
+
+  @Then("Verify that user is able to edit Analysis at Results page")
+  public void verifyThatUserIsAbltToEditAnalysisAtResultsPage () {
+    String updatedName = "updated" + Math.random();
+    String updatedDescription = "updatedDescription" + Math.random();
+    AnalysisPage analysisPage = new AnalysisPage();
+    new MainPage().navigateToResultsPage();
+    analysisPage.editAnalysisDetails(updatedName, updatedDescription);
+    assertThat(updatedName).isEqualTo(analysisPage.getAnalysisResultsName());
+    assertThat(updatedDescription).isEqualTo(analysisPage.getAnalysisResultsdescription());
+
+  }
+
+
+  @Then("Verify that user is able to start analysis from Analysis page")
+  public void verifyThatUserIsAbleToStartAnalysisFromAnalysisPage () throws InterruptedException {
+    AnalysisPage analysisPage = new AnalysisPage();
+
+    Map<String, String> data = getData("runList");
+
+    String analysisName = "test" + Math.random();
+    String description = "description of" + analysisName;
+
+    analysisPage.fillForm(analysisName, description);
+    analysisPage.choseReadsOption("Enter SRA Run ID");
+    analysisPage.enterRunId(data.get("firstRun"));
+
   }
 }
 

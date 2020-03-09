@@ -7,6 +7,9 @@ public class HeaderMenu extends TaxonomerPages{
   @FindBy(xpath = "//div[@id='main-menu']//a[contains(text(),'Analyses')]")
   private WebElement analyses_menuElement;
 
+  @FindBy(xpath = "//div[@id='main-menu']//a[contains(text(),'Home')]")
+  private WebElement home_menuElement;
+
 
   public void navigateTo(String menuOption) {
     switch (menuOption) {
@@ -14,6 +17,7 @@ public class HeaderMenu extends TaxonomerPages{
         analyses_menuElement.click();
         break;
       case ("Home"):
+        home_menuElement.click();
         break;
       default: throw new RuntimeException ("Unrecognized menu option " + menuOption);
     }

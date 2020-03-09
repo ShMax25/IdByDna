@@ -26,7 +26,7 @@ public class TestRunner {
   @BeforeClass
   public static void setup() {
     System.out.println("BeforeAll");
-    getDriver().manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
+    getDriver().manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
     getDriver().manage().window().fullscreen();
   }
 

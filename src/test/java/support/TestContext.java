@@ -16,14 +16,22 @@ import java.util.Map;
 
 public class TestContext {
   //Here could be selected which browser will be used
-  private static WebDriver driver = initialize("chrome");
+  private static WebDriver driver;
 
   public static WebDriver getDriver() {
     return driver;
   }
 
   public static WebElement waitForElement(WebElement element) {
-    return new WebDriverWait(getDriver(), 15, 200).until(ExpectedConditions.elementToBeClickable(element));
+    return new WebDriverWait(getDriver(), 15, 200).until(ExpectedConditions.visibilityOf(element));
+  }
+
+  public static void teardown() {
+    driver.quit();
+  }
+
+  public static void initialize() {
+    initialize("chrome");
   }
 
   //data rider

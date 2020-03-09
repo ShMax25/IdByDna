@@ -54,6 +54,27 @@ public class AnalysisPage extends TaxonomerPages{
   @FindBy (xpath = "//tbody/tr[1]//button[contains(@title,'Delete')]")
   private WebElement firstDeleteanalysis_button;
 
+  @FindBy (xpath = "//button[@class='btn btn-primary']")
+  private WebElement updateAnalysis_button;
+
+  @FindBy (xpath = "//tbody/tr[1]//a[contains(@title,'Edit')]")
+  private WebElement firstEditAnalysis_button;
+
+  @FindBy (xpath = "//tbody/tr[1]/td[2]")
+  private WebElement firstAnalysisDescription_element;
+
+  @FindBy (xpath = "//a[@class='header-icon info pull-right']")
+  private WebElement analysisDetails_button;
+
+  @FindBy (xpath = "//button[@class='btn btn-primary'][contains(text(),'Edit')]")
+  private WebElement editAnalysis_button;
+
+  @FindBy (xpath = "//h2[@class='pull-left']")
+  private WebElement analysisName_element;
+
+  @FindBy (xpath = "//div[@class='panel panel-info']/div[@class='panel-body']")
+  private WebElement analysisDetailsDescription_field;
+
   public AnalysisPage () {
     setUrl("https://www.taxonomer.com/analyses/new");
   }
@@ -63,10 +84,18 @@ public class AnalysisPage extends TaxonomerPages{
   }
 
 
-  public void fillForm (String analysisName) {
+  public void fillForm (String analysisName, String description) {
     analysisName_field.sendKeys(analysisName);
-    analysisDescriprion_field.sendKeys("Description");
+    analysisDescriprion_field.sendKeys(description);
     create_button.click();
+  }
+
+  public void updateForm (String updatedName, String updatedDescription) {
+    analysisName_field.clear();
+    analysisName_field.sendKeys(updatedName);
+    analysisDescriprion_field.clear();
+    analysisDescriprion_field.sendKeys(updatedDescription);
+    updateAnalysis_button.click();
   }
 
 
@@ -89,7 +118,8 @@ public class AnalysisPage extends TaxonomerPages{
     sraRunId_field.sendKeys(firstRun);
   }
 
-  public void submitAnalysis () {
+  public void submitAnalysis () throws InterruptedException {
+    Thread.sleep(2000);
     go_button.click();
   }
 
@@ -130,5 +160,36 @@ public class AnalysisPage extends TaxonomerPages{
       }
     }
     return false;
+  }
+
+  public void confirmUpdate () {
+    updateAnalysis_button.click();
+  }
+
+  public void editFirstAnalysis () {
+    firstEditAnalysis_button.click();
+  }
+
+  public String getFirstAbalysisDescription() {
+    return firstAnalysisDescription_element.getText();
+  }
+
+  public void openAnalysisDetails () {
+    analysisDetails_button.click();
+  }
+
+  public void editAnalysisDetails (String name, String description) {
+    analysisDetails_button.click();
+    editAnalysis_button.click();
+    updateForm(name, description);
+  }
+
+  public String getAnalysisResultsName() {
+    return analysisName_element.getText();
+  }
+
+  public String getAnalysisResultsdescription () {
+    analysisDetails_button.click();
+    return waitForElement(analysisDetailsDescription_field).getText();
   }
 }
