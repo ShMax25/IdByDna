@@ -3,10 +3,13 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
 import static support.TestContext.getDriver;
+import static support.TestContext.waitForElement;
 
 public class MainPage extends TaxonomerPages {
   @FindBy (xpath = "//a[@class='btn btn-primary btn-xs pull-right ember-view']")
@@ -27,7 +30,7 @@ public class MainPage extends TaxonomerPages {
   @FindBy (xpath = "//tbody/tr[1]/td[1]/a")
   private WebElement firstAnalysisname_link;
 
-  @FindBy (xpath = "//tbody/tr[1]//a[contains(@title,'Edit')]")
+  @FindBy (xpath = "//tbody/tr[1]//button[contains(@title,'Delete')]")
   private WebElement firstDeleteanalysis_button;
 
   @FindBy (xpath = "//tbody/tr[1]/td[2]")
