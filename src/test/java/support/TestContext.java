@@ -38,7 +38,14 @@ public class TestContext {
     try {
       TakesScreenshot ts = (TakesScreenshot)driver;
       File file = ts.getScreenshotAs(OutputType.FILE);
-      FileUtils.copyFile(file, new File(System.getProperty("user.dir") + "/src/test/resources/screenshots/"+screenshotName+".png"));
+      String path = "";
+      String osName = System.getProperty("os.name");
+      if (osName.contains("Windows")) {
+        FileUtils.copyFile(file, new File(System.getProperty("user.dir") + "\\src\\test\\resources\\drivers\\"+screenshotName+".png"));
+      }
+      if (osName.contains("Mac")) {
+        FileUtils.copyFile(file, new File(System.getProperty("user.dir") + "/src/test/resources/screenshots/"+screenshotName+".png"));
+      }
     } catch (IOException e) {
       System.out.println("Exception while taking screenshot");
     }
