@@ -9,11 +9,10 @@ import pages.HeaderMenu;
 import pages.LoginPage;
 import pages.MainPage;
 import pages.AnalysisPage;
-
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static support.TestContext.getData;
+import static support.TestContext.*;
 
 public class StepDefinitions {
   @Given("Open {string} page")

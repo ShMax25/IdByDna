@@ -1,6 +1,9 @@
 package support;
 
 import cucumber.api.java8.Fi;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,6 +15,7 @@ import org.yaml.snakeyaml.Yaml;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Map;
 
 public class TestContext {
@@ -28,6 +32,16 @@ public class TestContext {
 
   public static void teardown() {
     driver.quit();
+  }
+
+  public static void captureScreenshot(String screenshotName) {
+    try {
+      TakesScreenshot ts = (TakesScreenshot)driver;
+      File file = ts.getScreenshotAs(OutputType.FILE);
+      FileUtils.copyFile(file, new File(System.getProperty("user.dir") + "/src/test/resources/screenshots/"+screenshotName+".png"));
+    } catch (IOException e) {
+      System.out.println("Exception while taking screenshot");
+    }
   }
 
   public static void initialize() {
